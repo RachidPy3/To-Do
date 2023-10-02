@@ -12,11 +12,26 @@ const taskList = document.querySelector("ul")
 
 let id = 0
 
+function deleteTask(deleteTarget){
+    taskList.removeChild(deleteTarget)
+}
+
 function createTask(){
     let task = new Task(id, input.value, false)
+
     const li = document.createElement("li")
+    const deleteBtn = document.createElement("button")
+
+    deleteBtn.addEventListener("click", ()=>{
+        const deleteTarget = deleteBtn.parentElement
+        deleteTask(deleteTarget)
+    })
+
     li.textContent = task.taskName
+    deleteBtn.textContent = "Done"
+    li.appendChild(deleteBtn)
     li.dataset.id = task.id
+
     return li
 }
 
